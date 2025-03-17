@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-  resources :reviews
   resources :offers
-  resources :appliances
+  resources :appliances do
+    resources :reviews
+  end
   resources :favourite_lists
   devise_for :users
   root to: "pages#home"
