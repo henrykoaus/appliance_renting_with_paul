@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @appliance %>
+
+<div>
+  <%= link_to "Edit this appliance", edit_appliance_path(@appliance) %> |
+  <%= link_to "Back to appliances", appliances_path %>
+
+  <%= button_to "Destroy this appliance", @appliance, method: :delete %>
+</div>

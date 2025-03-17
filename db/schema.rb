@@ -10,9 +10,55 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_03_17_034408) do
+ActiveRecord::Schema[7.1].define(version: 2025_03_17_042001) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "appliances", force: :cascade do |t|
+    t.string "photo_url"
+    t.string "name"
+    t.string "address"
+    t.string "availability"
+    t.float "price"
+    t.text "overview"
+    t.bigint "user_id", null: false
+    t.bigint "favourite_list_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["favourite_list_id"], name: "index_appliances_on_favourite_list_id"
+    t.index ["user_id"], name: "index_appliances_on_user_id"
+  end
+
+  create_table "favourite_lists", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_favourite_lists_on_user_id"
+  end
+
+  create_table "offers", force: :cascade do |t|
+    t.date "check_in_date"
+    t.date "check_out_date"
+    t.bigint "user_id", null: false
+    t.bigint "appliance_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["appliance_id"], name: "index_offers_on_appliance_id"
+    t.index ["user_id"], name: "index_offers_on_user_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.text "comment"
+    t.float "rating"
+    t.bigint "appliance_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["appliance_id"], name: "index_reviews_on_appliance_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -27,4 +73,11 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_17_034408) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "appliances", "favourite_lists"
+  add_foreign_key "appliances", "users"
+  add_foreign_key "favourite_lists", "users"
+  add_foreign_key "offers", "appliances"
+  add_foreign_key "offers", "users"
+  add_foreign_key "reviews", "appliances"
+  add_foreign_key "reviews", "users"
 end
