@@ -1,5 +1,5 @@
 
-<%= simple_form_for(@favourite_list) do |f| %>
+<%= simple_form_for(@favourite) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
@@ -7,6 +7,7 @@
     <%= f.input :name %>
     <%= f.input :description %>
     <%= f.association :user %>
+    <%= f.association :appliance %>
   </div>
 
   <div class="form-actions">
