@@ -17,7 +17,7 @@ class AppliancesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create appliance" do
     assert_difference("Appliance.count") do
-      post appliances_url, params: { appliance: { address: @appliance.address, availability: @appliance.availability, favourite_list_id: @appliance.favourite_list_id, name: @appliance.name, overview: @appliance.overview, photo_url: @appliance.photo_url, price: @appliance.price, user_id: @appliance.user_id } }
+      post appliances_url, params: { appliance: { address: @appliance.address, availability: @appliance.availability, name: @appliance.name, overview: @appliance.overview, photo_url: @appliance.photo_url, price: @appliance.price, user_id: @appliance.user_id } }
     end
 
     assert_redirected_to appliance_url(Appliance.last)
@@ -34,7 +34,7 @@ class AppliancesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update appliance" do
-    patch appliance_url(@appliance), params: { appliance: { address: @appliance.address, availability: @appliance.availability, favourite_list_id: @appliance.favourite_list_id, name: @appliance.name, overview: @appliance.overview, photo_url: @appliance.photo_url, price: @appliance.price, user_id: @appliance.user_id } }
+    patch appliance_url(@appliance), params: { appliance: { address: @appliance.address, availability: @appliance.availability, name: @appliance.name, overview: @appliance.overview, photo_url: @appliance.photo_url, price: @appliance.price, user_id: @appliance.user_id } }
     assert_redirected_to appliance_url(@appliance)
   end
 

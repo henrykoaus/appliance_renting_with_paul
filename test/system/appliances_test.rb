@@ -16,7 +16,6 @@ class AppliancesTest < ApplicationSystemTestCase
 
     fill_in "Address", with: @appliance.address
     fill_in "Availability", with: @appliance.availability
-    fill_in "Favourite list", with: @appliance.favourite_list_id
     fill_in "Name", with: @appliance.name
     fill_in "Overview", with: @appliance.overview
     fill_in "Photo url", with: @appliance.photo_url
@@ -34,7 +33,6 @@ class AppliancesTest < ApplicationSystemTestCase
 
     fill_in "Address", with: @appliance.address
     fill_in "Availability", with: @appliance.availability
-    fill_in "Favourite list", with: @appliance.favourite_list_id
     fill_in "Name", with: @appliance.name
     fill_in "Overview", with: @appliance.overview
     fill_in "Photo url", with: @appliance.photo_url

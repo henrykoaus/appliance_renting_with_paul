@@ -8,7 +8,6 @@ class CreateAppliances < ActiveRecord::Migration[7.1]
       t.float :price
       t.text :overview
       t.references :user, null: false, foreign_key: true
-      t.references :favourite_list, null: false, foreign_key: true
 
       t.timestamps
     end
