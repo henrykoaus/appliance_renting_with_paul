@@ -1,5 +1,6 @@
 class AppliancesController < ApplicationController
   before_action :set_appliance, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!, only: %i[ new ]
 
   # GET /appliances or /appliances.json
   def index
@@ -22,7 +23,8 @@ class AppliancesController < ApplicationController
   # POST /appliances or /appliances.json
   def create
     @appliance = Appliance.new(appliance_params)
-
+    @appliance.user = current_user
+    # raise
     respond_to do |format|
       if @appliance.save
         format.html { redirect_to @appliance, notice: "Appliance was successfully created." }
