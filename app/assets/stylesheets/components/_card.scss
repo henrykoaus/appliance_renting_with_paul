@@ -1,0 +1,13 @@
+.heart-icon {
+  transition: all 0.3s ease;
+  opacity: 0.8;
+}
+
+.heart-icon:hover {
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+.fa-heart {
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.1));
+}

@@ -1,5 +1,11 @@
 <div class="col-md-4" id="<%= dom_id appliance %>">
   <div class="card shadow-lg border-0 h-100">
+    <!-- Heart Icon -->
+    <div class="position-absolute bottom-0 end-0 m-3">
+      <%= link_to "#", class: "text-decoration-none text-danger heart-icon" do %>
+        <i class="far fa-heart fa-lg"></i>
+      <% end %>
+    </div>
     <!-- Movie Poster -->
     <%= image_tag( appliance.photo_url , class: "card-img-top", alt: appliance.name, style: "height: 300px; object-fit: cover;") %>
     <!-- Card Body -->
