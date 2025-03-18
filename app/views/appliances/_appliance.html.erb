@@ -1,37 +1,30 @@
-<div id="<%= dom_id appliance %>">
-  <p>
-    <strong>Photo url:</strong>
-    <%= appliance.photo_url %>
-  </p>
+<div class="col-md-4" id="<%= dom_id appliance %>">
+  <div class="card shadow-lg border-0 h-100">
+    <!-- Movie Poster -->
+    <%= image_tag( appliance.photo_url , class: "card-img-top", alt: appliance.name, style: "height: 300px; object-fit: cover;") %>
+    <!-- Card Body -->
+    <div class="card-body d-flex flex-column justify-content-between">
 
-  <p>
-    <strong>Name:</strong>
-    <%= appliance.name %>
-  </p>
+      <!-- Movie Title & Rating -->
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <h4 class="card-title m-0"><strong><%= appliance.name %></strong></h4>
+        <span class="badge bg-warning text-dark">⭐ <%= appliance.address %></span>
+      </div>
 
-  <p>
-    <strong>Address:</strong>
-    <%= appliance.address %>
-  </p>
+      <!-- Movie Overview -->
+      <p class="card-text text-muted" style="font-size: 0.9rem;">
+        <%= truncate(appliance.overview, length: 120) %>
+      </p>
 
-  <p>
-    <strong>Availability:</strong>
-    <%= appliance.availability %>
-  </p>
-
-  <p>
-    <strong>Price:</strong>
-    <%= appliance.price %>
-  </p>
-
-  <p>
-    <strong>Overview:</strong>
-    <%= appliance.overview %>
-  </p>
-
-  <p>
-    <strong>User:</strong>
-    <%= appliance.user_id %>
-  </p>
-
+      <!-- appliance Comment & Delete -->
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <% if appliance.price.present? %>
+          <blockquote class="blockquote text-primary fst-italic">
+            “<%= appliance.price %>”
+          </blockquote>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>
+
