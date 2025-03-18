@@ -1,31 +1,37 @@
 class ReviewsController < ApplicationController
-  before_action :set_review, only: %i[ show edit update destroy ]
+  before_action :set_appliance
+  before_action :set_review, only: %i[show edit update destroy]
 
-  # GET /reviews or /reviews.json
+  # GET /appliances/:appliance_id/reviews
   def index
-    @reviews = Review.all
+    if params[:appliance_id]
+      @appliance = Appliance.find(params[:appliance_id])
+      @reviews = @appliance.reviews
+    else
+      @reviews = Review.all
+    end
   end
 
-  # GET /reviews/1 or /reviews/1.json
+  # GET /appliances/:appliance_id/reviews/:id
   def show
   end
 
-  # GET /reviews/new
+  # GET /appliances/:appliance_id/reviews/new
   def new
     @review = Review.new
   end
 
-  # GET /reviews/1/edit
+  # GET /appliances/:appliance_id/reviews/:id/edit
   def edit
   end
 
-  # POST /reviews or /reviews.json
+  # POST /appliances/:appliance_id/reviews
   def create
     @review = Review.new(review_params)
 
     respond_to do |format|
       if @review.save
-        format.html { redirect_to @review, notice: "Review was successfully created." }
+        format.html { redirect_to appliance_review_path(@appliance, @review), notice: "Review was successfully created." }
         format.json { render :show, status: :created, location: @review }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -34,11 +40,11 @@ class ReviewsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /reviews/1 or /reviews/1.json
+  # PATCH/PUT /appliances/:appliance_id/reviews/:id
   def update
     respond_to do |format|
       if @review.update(review_params)
-        format.html { redirect_to @review, notice: "Review was successfully updated." }
+        format.html { redirect_to appliance_review_path(@appliance, @review), notice: "Review was successfully updated." }
         format.json { render :show, status: :ok, location: @review }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -47,24 +53,27 @@ class ReviewsController < ApplicationController
     end
   end
 
-  # DELETE /reviews/1 or /reviews/1.json
+  # DELETE /appliances/:appliance_id/reviews/:id
   def destroy
     @review.destroy!
 
     respond_to do |format|
-      format.html { redirect_to reviews_path, status: :see_other, notice: "Review was successfully destroyed." }
+      format.html { redirect_to appliance_reviews_path(@appliance), status: :see_other, notice: "Review was successfully destroyed." }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_review
-      @review = Review.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def review_params
-      params.require(:review).permit(:comment, :rating, :appliance_id, :user_id)
-    end
+  def set_appliance
+    @appliance = Appliance.find(params[:appliance_id])
+  end
+
+  def set_review
+    @review = @appliance.reviews.find(params[:id])
+  end
+
+  def review_params
+    params.require(:review).permit(:comment, :rating, :user_id)
+  end
 end
