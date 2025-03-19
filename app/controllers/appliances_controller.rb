@@ -5,6 +5,7 @@ class AppliancesController < ApplicationController
   # GET /appliances or /appliances.json
   def index
     @appliances = Appliance.all
+    @user = current_user
   end
 
   # GET /appliances/1 or /appliances/1.json

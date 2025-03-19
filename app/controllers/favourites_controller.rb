@@ -1,49 +1,16 @@
 class FavouritesController < ApplicationController
-  before_action :set_favourite, only: %i[ show edit update destroy ]
-
-  # GET /favourites or /favourites.json
-  def index
-    @favourites = Favourite.all
-  end
-
-  # GET /favourites/1 or /favourites/1.json
-  def show
-  end
-
-  # GET /favourites/new
-  def new
-    @favourite = Favourite.new
-  end
-
-  # GET /favourites/1/edit
-  def edit
-  end
+  before_action :set_favourite, only: %i[ destroy ]
 
   # POST /favourites or /favourites.json
   def create
     @favourite = Favourite.new(favourite_params)
-
-    respond_to do |format|
-      if @favourite.save
-        format.html { redirect_to @favourite, notice: "Favourite was successfully created." }
-        format.json { render :show, status: :created, location: @favourite }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @favourite.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /favourites/1 or /favourites/1.json
-  def update
-    respond_to do |format|
-      if @favourite.update(favourite_params)
-        format.html { redirect_to @favourite, notice: "Favourite was successfully updated." }
-        format.json { render :show, status: :ok, location: @favourite }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @favourite.errors, status: :unprocessable_entity }
-      end
+    @favourite.favourite_list = current_user.favourite_list
+    if @favourite.save
+      flash[:notice] = "successfully added!"
+      render json: { message: flash[:notice] }, status: :created
+    else
+      flash[:alert] = "There was an issue with creating your model."
+      render json: { message: flash[:alert], errors: @favourite.errors.full_messages }, status: 500
     end
   end
 
@@ -65,6 +32,6 @@ class FavouritesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def favourite_params
-      params.require(:favourite).permit(:name, :description, :user_id, :appliance_id)
+      params.require(:favourite).permit(:appliance_id)
     end
 end
