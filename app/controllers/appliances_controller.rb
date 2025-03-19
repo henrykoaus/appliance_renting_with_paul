@@ -9,6 +9,8 @@ class AppliancesController < ApplicationController
 
   # GET /appliances/1 or /appliances/1.json
   def show
+    @review = Review.new
+    @offers = @appliance.offers
   end
 
   # GET /appliances/new

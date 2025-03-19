@@ -1,26 +1,22 @@
-<p style="color: green"><%= notice %></p>
-
-    <% if @reviews.any? %>
-      <div class="col-md-6">
-        <h4 class="mb-4">Reviews</h4>
-        <div class="list-group">
-          <% @reviews.each do |review| %>
-            <div class="list-group-item shadow-sm mb-3 p-3 rounded">
-              <p>
-                <% (1..5).each do |i| %>
-                  <i class="fa-star <%= i <= review.rating ? 'fas text-warning' : 'far text-secondary' %>"></i>
-                <% end %>
-                <strong><%= review.rating.round(1).to_i %> / 5</strong>
-              </p>
-              <p><%= review.comment %></p>
-            </div>
-          <% end %>
+<% if reviews.any? %>
+  <div class="col-md-6">
+    <h4 class="mb-4">Reviews</h4>
+    <div class="list-group">
+      <% reviews.each do |review| %>
+        <div class="list-group-item shadow-sm mb-3 p-3 rounded">
+          <p>
+            <% (1..5).each do |i| %>
+              <i class="fa-star <%= i <= review.rating ? 'fas text-warning' : 'far text-secondary' %>"></i>
+            <% end %>
+            <strong><%= review.rating.round(1).to_i %> / 5</strong>
+          </p>
+          <p><%= review.comment %></p>
         </div>
-      </div>
-    <% else %>
-      <div class="col-md-6", id="no-content">
-        <h5>No Reviews Yet</h5>
-      </div>
-    <% end %>
-
-<%= link_to "Add review", new_appliance_review_path %>
+      <% end %>
+    </div>
+  </div>
+<% else %>
+  <div class="col-md-6" id="no-content">
+    <h5>No Reviews Yet</h5>
+  </div>
+<% end %>

@@ -45,7 +45,6 @@ henry.save
   end
   Appliance.create!(
     photo_url: data['urls']['raw'],
-    # photo_url: "https://static.vecteezy.com/system/resources/previews/011/197/664/non_2x/angry-bird-character-vector.jpg",
     name: Faker::Name.name,
     address: Faker::Address.full_address,
     availability: "March 19-April 1",

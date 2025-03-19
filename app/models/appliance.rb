@@ -10,4 +10,5 @@ class Appliance < ApplicationRecord
   def user_must_be_merchant
     errors.add(:user, "must be a merchant") unless user&.merchant?
   end
+  has_many :offers
 end
