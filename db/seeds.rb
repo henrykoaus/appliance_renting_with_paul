@@ -11,8 +11,29 @@ import "faker"
 require 'net/http'
 require 'json'
 
+Favourite.destroy_all
 Appliance.destroy_all
-#
+FavouriteList.destroy_all
+User.destroy_all
+
+# add Users
+paul = User.new
+paul.username = "paul"
+paul.email = "paul618300@gmail.com"
+paul.password = "123456"
+paul.role = 0
+paul.favourite_list =  FavouriteList.new
+paul.save
+
+henry = User.new
+henry.username = "henry"
+henry.email = "butwoo91@gmail.com"
+henry.password = "123456"
+henry.role = 1
+henry.favourite_list =  FavouriteList.new
+henry.save
+
+# add appliances
 20.times do
   url = URI("https://api.unsplash.com/photos/random?client_id=4SNI-X9XtwrDDQH3JrvQfknmNtuvpnrsVemUhP1uPGk&query=house&orientation=landscape")
 
@@ -24,13 +45,23 @@ Appliance.destroy_all
   end
   Appliance.create!(
     photo_url: data['urls']['raw'],
+    # photo_url: "https://static.vecteezy.com/system/resources/previews/011/197/664/non_2x/angry-bird-character-vector.jpg",
     name: Faker::Name.name,
     address: Faker::Address.full_address,
     availability: "March 19-April 1",
     price:(50..100).to_a.sample,
     overview:  Faker::Lorem.sentence,
-    user: User.all.sample,
+    user: henry,
   )
 end
 
+# add favourites
 
+20.times do
+  favourite = Favourite.new
+  favourite.name = Faker::Name.name
+  favourite.description =  Faker::Lorem.sentence
+  favourite.favourite_list = FavouriteList.all.sample
+  favourite.appliance =  Appliance.all.sample
+  favourite.save
+end
