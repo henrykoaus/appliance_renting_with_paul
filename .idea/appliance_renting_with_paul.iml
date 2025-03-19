@@ -52,6 +52,7 @@
     <orderEntry type="library" scope="PROVIDED" name="concurrent-ruby (v1.3.5, rbenv: 3.3.5) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="connection_pool (v2.5.0, rbenv: 3.3.5) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="crass (v1.0.6, rbenv: 3.3.5) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="csv (v3.3.2, rbenv: 3.3.5) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="date (v3.4.1, rbenv: 3.3.5) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="debug (v1.10.0, rbenv: 3.3.5) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="devise (v4.9.4, rbenv: 3.3.5) [gem]" level="application" />
@@ -63,6 +64,7 @@
     <orderEntry type="library" scope="PROVIDED" name="faker (v3.5.1, rbenv: 3.3.5) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="ffi (v1.17.1, rbenv: 3.3.5) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="font-awesome-sass (v6.7.2, rbenv: 3.3.5) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="geocoder (v1.8.5, rbenv: 3.3.5) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="globalid (v1.2.1, rbenv: 3.3.5) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="i18n (v1.14.7, rbenv: 3.3.5) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="importmap-rails (v2.1.0, rbenv: 3.3.5) [gem]" level="application" />
@@ -149,6 +151,9 @@
         <option value="devise:install" />
         <option value="devise:views" />
         <option value="generator" />
+        <option value="geocoder:config" />
+        <option value="geocoder:maxmind:geolite_city" />
+        <option value="geocoder:maxmind:geolite_country" />
         <option value="helper" />
         <option value="integration_test" />
         <option value="jbuilder" />
@@ -190,6 +195,9 @@
         <option value="devise:install" />
         <option value="devise:views" />
         <option value="generator" />
+        <option value="geocoder:config" />
+        <option value="geocoder:maxmind:geolite_city" />
+        <option value="geocoder:maxmind:geolite_country" />
         <option value="helper" />
         <option value="integration_test" />
         <option value="jbuilder" />
@@ -305,6 +313,10 @@
     </entry>
     <entry key="public/stylesheets">
       <value>file://$MODULE_DIR$/public/stylesheets</value>
+    </entry>
+    <entry key="test/mailers/previews">
+      <value>file://$MODULE_DIR$/test/mailers/previews</value>
+      <value>file://$MODULE_DIR$/test/mailers/previews</value>
     </entry>
     <entry key="tmp">
       <value>file://$MODULE_DIR$/tmp</value>
@@ -493,6 +505,27 @@
                 </subtasks>
               </RakeTaskImpl>
               <RakeTaskImpl description="" fullCommand="db:truncate_all" id="truncate_all" />
+            </subtasks>
+          </RakeTaskImpl>
+          <RakeTaskImpl id="geocode">
+            <subtasks>
+              <RakeTaskImpl description="Geocode all objects without coordinates" fullCommand="geocode:all" id="all" />
+            </subtasks>
+          </RakeTaskImpl>
+          <RakeTaskImpl id="geocoder">
+            <subtasks>
+              <RakeTaskImpl id="maxmind">
+                <subtasks>
+                  <RakeTaskImpl id="geolite">
+                    <subtasks>
+                      <RakeTaskImpl description="Download MaxMind GeoLite City data" fullCommand="geocoder:maxmind:geolite:download" id="download" />
+                      <RakeTaskImpl description="Extract (unzip) MaxMind GeoLite City data" fullCommand="geocoder:maxmind:geolite:extract" id="extract" />
+                      <RakeTaskImpl description="Load/refresh MaxMind GeoLite City data" fullCommand="geocoder:maxmind:geolite:insert" id="insert" />
+                      <RakeTaskImpl description="Download and load/refresh MaxMind GeoLite City data" fullCommand="geocoder:maxmind:geolite:load" id="load" />
+                    </subtasks>
+                  </RakeTaskImpl>
+                </subtasks>
+              </RakeTaskImpl>
             </subtasks>
           </RakeTaskImpl>
           <RakeTaskImpl id="importmap">
