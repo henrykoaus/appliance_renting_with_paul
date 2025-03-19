@@ -10,6 +10,7 @@ class ReviewsController < ApplicationController
     else
       @reviews = Review.all
     end
+    @review = Review.new
   end
 
   # GET /appliances/:appliance_id/reviews/:id

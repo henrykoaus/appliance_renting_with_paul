@@ -53,7 +53,15 @@
       <h4>Reviews</h4>
       <%= render template: "reviews/index", locals: { reviews: @appliance.reviews } %>
 
-      <%= link_to "Write a Review", new_appliance_review_path(@appliance), class: "btn btn-primary" %>
+      <div data-controller="toggle" class="mt-5">
+        <button data-action="click->toggle#fire" class="btn btn-outline-primary">
+          Add a new review
+        </button>
+        <div data-toggle-target="togglableElement" class="d-none">
+          <%= render "reviews/form", appliance: @appliance, review: @appliance.reviews.new %>
+        </div>
+      </div>
+
 
       <h4>Location</h4>
       <div id="map" style="height: 300px;"></div> <!-- Placeholder for a map -->
@@ -67,7 +75,7 @@
       <div class="card p-3 shadow-sm">
         <h4><%= @appliance.price %> per night</h4>
         <hr>
-
+        <%= render template: "offers/index", locals: { offers: @offers } %>
       </div>
     </div>
   </div>

@@ -1,7 +1,7 @@
 <div class="col-md-5">
   <h4 class="mb-4">Add Your Review</h4>
   <div class="card shadow-sm p-4">
-    <%= simple_form_for([@appliance, @review], remote: true,
+    <%= simple_form_for([appliance, review], remote: true,
         html: { data: { controller: "ajax", action: "submit->ajax#submit" } }) do |f| %>
 
       <!-- Hidden Rating Input -->
