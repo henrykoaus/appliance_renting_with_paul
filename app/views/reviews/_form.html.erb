@@ -1,97 +1,37 @@
 <div class="col-md-5">
-      <h4 class="mb-4">Add Your Review</h4>
-      <div class="card shadow-sm p-4">
-        <%= simple_form_for([@appliance, @review]) do |f| %>
-          <!-- Hidden Rating Input -->
-          <%= f.input :rating, as: :hidden, input_html: { id: "rating-input" } %>
+  <h4 class="mb-4">Add Your Review</h4>
+  <div class="card shadow-sm p-4">
+    <%= simple_form_for([@appliance, @review], remote: true,
+        html: { data: { controller: "ajax", action: "submit->ajax#submit" } }) do |f| %>
 
-          <!-- Star Rating UI -->
-          <div class="mb-3">
-            <label>Rating:</label>
-            <div id="star-rating" class="d-flex gap-2">
-              <% (1..5).each do |i| %>
-                <i class="fa-star far text-secondary fs-3 star" data-value="<%= i %>"></i>
-              <% end %>
-            </div>
-          </div>
+      <!-- Hidden Rating Input -->
+      <%= f.input :rating, as: :hidden, input_html: { id: "rating-input", data: { ajax_target: "input" } } %>
 
-          <!-- Comment Input -->
-          <div class="mb-3">
-            <%= f.input :comment, label: "Comment", as: :text, input_html: { rows: 3 } %>
-          </div>
-
-          <%= f.submit "Add", class: "btn btn-primary w-100" %>
-        <% end %>
+      <!-- Star Rating UI -->
+      <div class="mb-3">
+        <label>Rating:</label>
+        <div id="star-rating" class="d-flex gap-2" data-ajax-target="stars">
+          <% (1..5).each do |i| %>
+            <i class="fa-star far text-secondary fs-3 star"
+               data-action="click->ajax#select"
+               data-ajax-value="<%= i %>"></i>
+          <% end %>
+        </div>
       </div>
-    </div>
+
+      <!-- Comment Input -->
+      <div class="mb-3">
+        <%= f.input :comment, label: "Comment", as: :text, input_html: { rows: 3, data: { ajax_target: "comment" } } %>
+      </div>
+
+      <%= f.submit "Add", class: "btn btn-primary w-100", data: { ajax_target: "submitButton" } %>
+    <% end %>
   </div>
 </div>
 
-<!-- JavaScript for Star Rating Interaction -->
-<script>
-document.addEventListener("turbo:load", function () {
-  const ratingInput = document.getElementById("rating-input");
-  const starContainer = document.getElementById("star-rating");
-
-  if (!ratingInput || !starContainer) {
-    console.error("Missing rating input or star container!");
-    return;
-  }
-
-  const stars = starContainer.querySelectorAll(".star");
-  let currentRating = 0;
-
-  // Unique storage key for the list
-  const applianceId = "<%= @appliance.id %>";
-
-  // Remove stored rating when user leaves the page
-  document.addEventListener("turbo:before-cache", function () {
-    localStorage.removeItem(`star-rating-${applianceId}`);
-  });
-
-  const savedRating = localStorage.getItem(`star-rating-${applianceId}`);
-
-  // If there's a valid saved rating, use it; otherwise, start with blank stars
-  if (savedRating && !isNaN(parseInt(savedRating, 10))) {
-    currentRating = parseInt(savedRating, 10);
-    ratingInput.value = currentRating;
-  } else {
-    ratingInput.value = ""; // Ensure it's blank initially
-  }
-
-  updateStars(currentRating); // Ensure stars start correctly
-
-  // Add click event to each star
-  stars.forEach(star => {
-    star.addEventListener("click", function () {
-      const value = parseInt(this.getAttribute("data-value"), 10);
-
-      if (currentRating === value) {
-        // Reset rating
-        currentRating = 0;
-        ratingInput.value = "";
-        localStorage.removeItem(`star-rating-${applianceId}`);
-      } else {
-        // Update rating
-        currentRating = value;
-        ratingInput.value = value;
-        localStorage.setItem(`star-rating-${applianceId}`, value);
-      }
-
-      updateStars(currentRating);
-    });
-  });
-
-  function updateStars(value) {
-    stars.forEach((star, index) => {
-      if (index < value) {
-        star.classList.remove("far", "text-secondary");
-        star.classList.add("fas", "text-warning");
-      } else {
-        star.classList.remove("fas", "text-warning");
-        star.classList.add("far", "text-secondary");
-      }
-    });
-  }
-});
-</script>
+<!-- Placeholder for showing new reviews dynamically -->
+<div id="reviews-list" data-ajax-target="reviewsList">
+  <% @appliance.reviews.each do |review| %>
+    <%= render review %>
+  <% end %>
+</div>

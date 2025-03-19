@@ -7,4 +7,14 @@
   <%= link_to "Back to appliances", appliances_path %>
 
   <%= button_to "Destroy this appliance", @appliance, method: :delete %>
+
+  <div class="container mt-5">
+    <div class="row">
+      <%= render template: "reviews/index", locals: { reviews: @appliance.reviews } %>
+      <div class="col-md-5">
+      <%= link_to "Write a Review", new_appliance_review_path(@appliance), class: "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+
 </div>
