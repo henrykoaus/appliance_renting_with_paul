@@ -5,7 +5,7 @@
         html: { data: { controller: "ajax", action: "submit->ajax#submit" } }) do |f| %>
 
       <!-- Hidden Rating Input -->
-      <%= f.input :rating, as: :hidden, input_html: { id: "rating-input", data: { ajax_target: "input" } } %>
+      <%= f.input :rating, as: :hidden, input_html: { id: "rating-input", name: "review[rating]", data: { ajax_target: "input" } } %>
 
       <!-- Star Rating UI -->
       <div class="mb-3">

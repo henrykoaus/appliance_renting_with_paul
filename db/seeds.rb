@@ -29,8 +29,6 @@ Appliance.destroy_all
     availability: "March 19-April 1",
     price:(50..100).to_a.sample,
     overview:  Faker::Lorem.sentence,
-    user: User.all.sample,
+    user: User.all.sample
   )
 end
-
-

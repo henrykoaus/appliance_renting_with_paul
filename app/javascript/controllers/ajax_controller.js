@@ -16,6 +16,8 @@ export default class extends Controller {
     const formAction = event.target.action;
 
     // Disable the submit button to prevent multiple submissions
+    formData.set(this.inputTarget.name, this.inputTarget.value);
+
     this.submitButtonTarget.disabled = true;
 
     // Perform the AJAX POST request
@@ -50,17 +52,20 @@ export default class extends Controller {
 
   // Star rating interaction
   select(event) {
-    const value = event.target.getAttribute("data-ajax-value");
-    const ratingInput = this.inputTarget;
+    const selectedValue = parseInt(event.target.getAttribute("data-ajax-value"));
+    const currentValue = parseInt(this.inputTarget.value) || 0; // Get current value
 
-    // Set the hidden rating input value to the selected star value
-    ratingInput.value = value;
+    if (selectedValue === currentValue) {
+      // If clicking the same star, remove selection (reset to 0)
+      this.inputTarget.value = 0;
+      this.updateStars(0);
+    } else {
+      // Otherwise, set the new rating
+      this.inputTarget.value = selectedValue;
+      this.updateStars(selectedValue);
+    }
 
-    // Update the visual state of the stars
-    this.updateStars(value);
-
-    console.log(`selected!!`);
-
+    console.log(`Selected rating: ${this.inputTarget.value}`);
   }
 
   // Update stars' visual state based on the selected rating
