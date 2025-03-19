@@ -6,28 +6,30 @@ class FavouritesController < ApplicationController
     @favourite = Favourite.new(favourite_params)
     @favourite.favourite_list = current_user.favourite_list
     if @favourite.save
-      flash[:notice] = "successfully added!"
+      flash[:notice] = 'Item was successfully removed!'
       render json: { message: flash[:notice] }, status: :created
     else
-      flash[:alert] = "There was an issue with creating your model."
+      flash[:alert] = 'There was an issue with creating your model.'
       render json: { message: flash[:alert], errors: @favourite.errors.full_messages }, status: 500
     end
   end
 
   # DELETE /favourites/1 or /favourites/1.json
   def destroy
-    @favourite.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to favourites_path, status: :see_other, notice: "Favourite was successfully destroyed." }
-      format.json { head :no_content }
+    if @favourite.destroy!
+      flash[:notice] = 'Item was successfully removed!'
+      render json: { message: flash[:notice] }, status: :ok
+    else
+      flash[:alert] = "There was an issue with creating your model."
+      render json: { message: flash[:alert], errors: @favourite.errors.full_messages }, status: 500
     end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_favourite
-      @favourite = Favourite.find(params[:id])
+      # @favourite = Favourite.find(params[:id])
+      @favourite = Favourite.where(appliance_id: params[:id], favourite_list: current_user.favourite_list).first
     end
 
     # Only allow a list of trusted parameters through.

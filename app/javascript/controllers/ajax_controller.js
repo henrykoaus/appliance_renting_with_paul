@@ -1,18 +1,27 @@
 import { Controller } from "@hotwired/stimulus"
 import { Turbo } from "@hotwired/turbo-rails"
-
 // Connects to data-controller="ajax"
 export default class extends Controller {
-  static targets = ["heart_togglableElement","input", "stars", "comment", "submitButton", "reviewsList"]
+  static targets = ["heartElement","input", "stars", "comment", "submitButton", "reviewsList"]
   static values = {
     isLogin: Boolean,
     loginUrl: String,
     applianceId: String,
-    saveFavouriteUrl: String
-  }
+    saveFavouriteUrl: String,
+    deleteFavouriteUrl: String
+}
   connect() {
     this.csrfToken = document.querySelector("[name='csrf-token']").content
   }
+
+    favourite() {
+        if (this.heartElementTarget.className === "far fa-heart fa-lg") {
+            this.save_favourite()
+        } else {
+            this.delete_favourite()
+        }
+    }
+
   save_favourite() {
     if(this.isLoginValue){
       console.log(this.loginUrlValue)
@@ -20,9 +29,6 @@ export default class extends Controller {
       Turbo.visit(this.loginUrlValue)
     }else{
       // console.log(this.saveFavouriteUrlValue)
-      this.heart_togglableElementTarget.className =
-          this.heart_togglableElementTarget.className === "fas fa-heart fa-lg" ?
-              "far fa-heart fa-lg" : "fas fa-heart fa-lg"
       const formData = new FormData()
       formData.append('appliance_id', this.applianceIdValue)
       // fetch url
@@ -42,11 +48,27 @@ export default class extends Controller {
           .then(response => response.json())
           .then((data) => {
             console.log(data)
+            this.heartElementTarget.className = "fas fa-heart fa-lg"
           })
-      // this.blank_heart_togglableElementTarget.classList.toggle("d-none");
-      // this.solid_heart_togglableElementTarget.classList.toggle("d-none");
     }
   }
+
+    delete_favourite() {
+        // fetch url
+        fetch(this.deleteFavouriteUrlValue, {
+            method: "delete", // Could be dynamic with Stimulus values
+            headers: {
+                "X-CSRF-Token": this.csrfToken,
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            }
+        })
+            .then(response => response.json())
+            .then((data) => {
+                console.log(data)
+                this.heartElementTarget.className = "far fa-heart fa-lg"
+            })
+    }
     // When the form is submitted
     submit(event) {
         event.preventDefault();

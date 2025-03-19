@@ -6,9 +6,14 @@
          data-ajax-is-login-value="<%= @user.nil? %>"
          data-ajax-appliance-id-value="<%= appliance.id %>"
          data-ajax-login-url-value="<%= new_user_session_path %>"
-         data-ajax-save-favourite-url-value="<%= favourites_url %>">
+         data-ajax-save-favourite-url-value="/favourites"
+         data-ajax-delete-favourite-url-value=" /favourites/<%= appliance.id %>">
       <div class="text-decoration-none text-danger heart-icon">
-        <i class="far fa-heart fa-lg" data-action="click->ajax#save_favourite" data-ajax-target="heart_togglableElement"></i>
+        <% if @user&.favourite_list&.appliances&.include?(appliance) %>
+          <i class="fas fa-heart fa-lg" data-action="click->ajax#favourite" data-ajax-target="heartElement"></i>
+        <% else %>
+          <i class="far fa-heart fa-lg" data-action="click->ajax#favourite" data-ajax-target="heartElement"></i>
+        <% end %>
       </div>
     </div>
       <%= link_to appliance_path(appliance), class: "text-decoration-none" do %>
