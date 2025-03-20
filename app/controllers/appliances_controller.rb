@@ -13,6 +13,7 @@ class AppliancesController < ApplicationController
   def show
     @review = Review.new
     @offers = @appliance.offers
+    @user = current_user
   end
 
   # GET /appliances/new

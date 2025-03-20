@@ -11,7 +11,8 @@
           <%= text_field_tag :address,
                              params[:address],
                              class: "form-control border-start-0 rounded-end-4",
-                             placeholder: "📍 Where to look?" %>
+                             placeholder: "📍 Where to look?",
+                             data: { placeholder_opacity: "true" }%>
         </div>
       </div>
       <!-- Min Price -->
@@ -23,7 +24,8 @@
           <%= number_field_tag :min_price,
                                params[:min_price],
                                class: "form-control border-start-0 rounded-end-4",
-                               placeholder: "Min 💰" %>
+                               placeholder: "Price Range (Min 💰)",
+                               data: { placeholder_opacity: "true" }%>
         </div>
       </div>
 
@@ -36,7 +38,8 @@
           <%= number_field_tag :max_price,
                                params[:max_price],
                                class: "form-control border-start-0 rounded-end-4",
-                               placeholder: "Max 💵" %>
+                               placeholder: "Price Range (Max 💵)",
+                               data: { placeholder_opacity: "true" }%>
         </div>
       </div>
 

@@ -51,7 +51,7 @@
       <%# <%= render 'calendar' %> <!-- Placeholder for a calendar partial -->
 
 <!--      Reviews-->
-      <%= render template: "reviews/index", locals: { reviews: @appliance.reviews } %>
+      <%= render template: "reviews/index", locals: { reviews: @appliance.reviews, deletable: false } %>
 
       <div data-controller="toggle"
            data-toggle-is-login-value="<%= @user.nil? %>"

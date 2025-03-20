@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     resources :reviews
     resources :offers, only: [ :new, :create, :edit, :update]
   end
-  resources :reviews, only: [ :destroy ]
+  resources :reviews, only: [ :destroy, :index ]
   resources :offers, only: [ :index, :show, :destroy ]
   devise_for :users
   root to: "appliances#index"

@@ -1,16 +1,10 @@
 class ReviewsController < ApplicationController
-  before_action :set_appliance, only: %i[show edit update index create]
+  before_action :set_appliance, only: %i[show edit update create]
   before_action :set_review, only: %i[show edit update]
 
   # GET /appliances/:appliance_id/reviews
   def index
-    if params[:appliance_id]
-      @appliance = Appliance.find(params[:appliance_id])
-      @reviews = @appliance.reviews
-    else
-      @reviews = Review.all
-    end
-    @review = Review.new
+    render template: "reviews/index", locals: { reviews: @reviews = current_user.reviews, deletable: true }
   end
 
 
@@ -48,9 +42,8 @@ class ReviewsController < ApplicationController
   # DELETE /appliances/:appliance_id/reviews/:id
   def destroy
     @review = Review.find(params[:id])
-    @appliance = @review.appliance
     if @review.destroy!
-      redirect_to appliance_path(@appliance), notice: "Review was successfully destroyed."
+      redirect_to reviews_path, notice: "Review was successfully destroyed."
     else
       flash[:alert] = 'There was an issue with creating your model.'
       render json: { message: flash[:alert], errors: @review.errors.full_messages }, status: 500

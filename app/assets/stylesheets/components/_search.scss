@@ -12,3 +12,10 @@
   transform: translateY(-2px);
   box-shadow: 0 7px 14px rgba(222, 184, 47, 1) !important;
 }
+
+/* Target only the placeholder text */
+[data-placeholder-opacity]::placeholder {
+  opacity: 0.3;
+  color: inherit; /* Maintain original color but with opacity */
+}
+

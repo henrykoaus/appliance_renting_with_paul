@@ -11,7 +11,9 @@
             <strong><%= review.rating.round(1).to_i %> / 5</strong>
           </p>
           <p><%= review.comment %></p>
-          <%= link_to "Destroy this review", review, data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?", turbo_method: :delete } %>
+          <% if deletable %>
+            <%= link_to "Destroy this review", review, data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?", turbo_method: :delete } %>
+          <% end %>
         </div>
       <% end %>
     </div>
