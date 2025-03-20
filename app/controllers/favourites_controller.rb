@@ -6,8 +6,8 @@ class FavouritesController < ApplicationController
     @favourite = Favourite.new(favourite_params)
     @favourite.favourite_list = current_user.favourite_list
     if @favourite.save
-      flash[:notice] = 'Item was successfully removed!'
-      render json: { message: flash[:notice] }, status: :created
+      flash[:alert] = 'Item was successfully added!'
+      render json: { message: flash[:alert] }, status: :created
     else
       flash[:alert] = 'There was an issue with creating your model.'
       render json: { message: flash[:alert], errors: @favourite.errors.full_messages }, status: 500
@@ -17,8 +17,8 @@ class FavouritesController < ApplicationController
   # DELETE /favourites/1 or /favourites/1.json
   def destroy
     if @favourite.destroy!
-      flash[:notice] = 'Item was successfully removed!'
-      render json: { message: flash[:notice] }, status: :ok
+      flash[:alert] = 'Item was successfully removed!'
+      render json: { message: flash[:alert] }, status: :ok
     else
       flash[:alert] = "There was an issue with creating your model."
       render json: { message: flash[:alert], errors: @favourite.errors.full_messages }, status: 500

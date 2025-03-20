@@ -27,7 +27,7 @@ export default class extends Controller {
       console.log("📅 Parsed Check-out:", checkOutDate);
 
       if (!isNaN(checkInDate.getTime()) && !isNaN(checkOutDate.getTime()) && checkOutDate > checkInDate) {
-        let days = Math.ceil((checkOutDate - checkInDate) / (1000 * 60 * 60 * 24)); // Convert milliseconds to days
+        let days = Math.ceil((checkOutDate - checkInDate) / (1000 * 60 * 60 * 24));
         let totalPrice = days * pricePerNight;
         this.totalPriceTarget.innerText = totalPrice.toFixed(2);
       } else {

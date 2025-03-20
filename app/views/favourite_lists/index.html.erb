@@ -1,9 +1,9 @@
-<%= render "shared/search" %>
+
 <!-- Example UI Card -->
-<% if @appliances.any? %>
+<% if @favourite_list.appliances.any? %>
   <div class="container my-5">
     <div class="row g-4">
-      <% @appliances.each do |appliance| %>
+      <% @favourite_list.appliances.each do |appliance| %>
         <%= render appliance %>
       <% end %>
     </div>
