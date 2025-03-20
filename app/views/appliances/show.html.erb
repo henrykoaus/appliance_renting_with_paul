@@ -53,7 +53,10 @@
 <!--      Reviews-->
       <%= render template: "reviews/index", locals: { reviews: @appliance.reviews } %>
 
-      <div data-controller="toggle" class="mt-5">
+      <div data-controller="toggle"
+           data-toggle-is-login-value="<%= @user.nil? %>"
+           data-toggle-login-url-value="<%= new_user_session_path %>"
+           class="mt-5">
         <button data-action="click->toggle#fire" class="btn btn-outline-primary">
           Add a new review
         </button>
