@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  resources :favourites
+  resources :favourites, only: [:create, :destroy]
+  resources :favourite_lists, only: [:index]
   resources :appliances do
     resources :reviews
   end
