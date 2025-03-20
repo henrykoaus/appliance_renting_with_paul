@@ -49,6 +49,7 @@ export default class extends Controller {
           .then((data) => {
             console.log(data)
             this.heartElementTarget.className = "fas fa-heart fa-lg"
+            document.body.insertAdjacentHTML("afterbegin", data.message)
           })
     }
   }
@@ -67,6 +68,7 @@ export default class extends Controller {
             .then((data) => {
                 console.log(data)
                 this.heartElementTarget.className = "far fa-heart fa-lg"
+                document.body.insertAdjacentHTML("afterbegin", data.message)
             })
     }
     // When the form is submitted

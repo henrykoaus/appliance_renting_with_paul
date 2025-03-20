@@ -4,6 +4,9 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = ["form", "input", "stars", "comment", "submitButton", "reviewsList"]
 
+    connect() {
+        this.csrfToken = document.querySelector("[name='csrf-token']").content
+    }
   // When the form is submitted
   submit(event) {
     const formData = new FormData(event.target);
@@ -18,7 +21,9 @@ export default class extends Controller {
     fetch(formAction, {
         method: "POST",
         headers: {
-            "Accept": "application/json"
+            "X-CSRF-Token": this.csrfToken,
+            "Accept": "application/json",
+            "Content-Type": "application/json"
         },
         body: formData
     })

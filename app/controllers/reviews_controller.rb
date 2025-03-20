@@ -1,6 +1,6 @@
 class ReviewsController < ApplicationController
-  before_action :set_appliance
-  before_action :set_review, only: %i[show edit update destroy]
+  before_action :set_appliance, only: %i[show edit update index create]
+  before_action :set_review, only: %i[show edit update]
 
   # GET /appliances/:appliance_id/reviews
   def index
@@ -13,31 +13,22 @@ class ReviewsController < ApplicationController
     @review = Review.new
   end
 
-  # GET /appliances/:appliance_id/reviews/:id
-  def show
-  end
 
   # GET /appliances/:appliance_id/reviews/new
   def new
     @review = Review.new
   end
 
-  # GET /appliances/:appliance_id/reviews/:id/edit
-  def edit
-  end
-
   # POST /appliances/:appliance_id/reviews
   def create
     @review = Review.new(review_params)
-
-    respond_to do |format|
-      if @review.save
-        format.html { redirect_to appliance_review_path(@appliance, @review), notice: "Review was successfully created." }
-        format.json { render :show, status: :created, location: @review }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @review.errors, status: :unprocessable_entity }
-      end
+    @review.appliance = @appliance
+    @review.user = current_user
+    if @review.save
+      redirect_to appliance_path(@appliance), notice: "Review was successfully added."
+    else
+      flash[:alert] = 'There was an issue with creating your model.'
+      render json: { message: flash[:alert], errors: @review.errors.full_messages }, status: 500
     end
   end
 
@@ -56,11 +47,13 @@ class ReviewsController < ApplicationController
 
   # DELETE /appliances/:appliance_id/reviews/:id
   def destroy
-    @review.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to appliance_reviews_path(@appliance), status: :see_other, notice: "Review was successfully destroyed." }
-      format.json { head :no_content }
+    @review = Review.find(params[:id])
+    @appliance = @review.appliance
+    if @review.destroy!
+      redirect_to appliance_path(@appliance), notice: "Review was successfully destroyed."
+    else
+      flash[:alert] = 'There was an issue with creating your model.'
+      render json: { message: flash[:alert], errors: @review.errors.full_messages }, status: 500
     end
   end
 
@@ -75,6 +68,6 @@ class ReviewsController < ApplicationController
   end
 
   def review_params
-    params.require(:review).permit(:comment, :rating, :user_id)
+    params.require(:review).permit(:comment, :rating)
   end
 end
