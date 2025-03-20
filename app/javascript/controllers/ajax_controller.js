@@ -2,7 +2,11 @@ import { Controller } from "@hotwired/stimulus"
 import { Turbo } from "@hotwired/turbo-rails"
 // Connects to data-controller="ajax"
 export default class extends Controller {
+<<<<<<< HEAD
+  static targets = ["heart_togglableElement"]
+=======
   static targets = ["heartElement","input", "stars", "comment", "submitButton", "reviewsList"]
+>>>>>>> d32b844cda6c46e980d48d2dd1d04a84c4d7b885
   static values = {
     isLogin: Boolean,
     loginUrl: String,
@@ -52,6 +56,8 @@ export default class extends Controller {
           })
     }
   }
+<<<<<<< HEAD
+=======
 
     delete_favourite() {
         // fetch url
@@ -145,4 +151,5 @@ export default class extends Controller {
         console.log(`Updated!! with ${value}`);
 
     }
+>>>>>>> d32b844cda6c46e980d48d2dd1d04a84c4d7b885
 }
