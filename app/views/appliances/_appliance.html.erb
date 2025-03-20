@@ -17,30 +17,40 @@
       </div>
     </div>
       <%= link_to appliance_path(appliance), class: "text-decoration-none" do %>
-        <!-- Movie Poster -->
+        <!-- appliance Poster -->
         <%= image_tag( appliance.photo_url , class: "card-img-top", alt: appliance.name, style: "height: 300px; object-fit: cover;") %>
 
         <!-- Card Body -->
         <div class="card-body d-flex flex-column justify-content-between">
 
-          <!-- Movie Title & Rating -->
+          <!-- appliance name & address -->
           <div class="d-flex justify-content-between align-items-center mb-2">
             <h4 class="card-title m-0"><strong><%= appliance.name %></strong></h4>
-            <span class="badge bg-warning text-dark">⭐ <%= appliance.address %></span>
+            <span class="badge bg-warning text-dark">
+              ⭐ <%= number_with_precision(appliance.average_rating, precision: 1) %>
+            </span>
           </div>
 
-          <!-- Movie Overview -->
+          <!-- appliance address -->
+          <p class="card-text text-muted d-flex align-items-center gap-2" style="font-size: 0.9rem;">
+            <span>
+              <span class="text-secondary fw-semibold">Location:</span>
+              <span class="text-dark ms-1" data-bs-toggle="tooltip" title="<%= appliance.address %>">
+                <%= appliance.address %>
+              </span>
+            </span>
+          </p>
+
+          <!-- appliance Overview -->
           <p class="card-text text-muted" style="font-size: 0.9rem;">
             <%= truncate(appliance.overview, length: 120) %>
           </p>
 
-          <!-- appliance Comment & Delete -->
+          <!-- appliance price -->
           <div class="d-flex justify-content-between align-items-center mb-2">
-            <% if appliance.price.present? %>
               <blockquote class="blockquote text-primary fst-italic">
                 “<%= appliance.price %>”
               </blockquote>
-            <% end %>
           </div>
         </div>
       <% end %>

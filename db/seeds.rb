@@ -15,6 +15,7 @@ Favourite.destroy_all
 Appliance.destroy_all
 FavouriteList.destroy_all
 User.destroy_all
+Review.destroy_all
 
 # add Users
 paul = User.new
@@ -63,4 +64,14 @@ end
   favourite.favourite_list = FavouriteList.all.sample
   favourite.appliance =  Appliance.all.sample
   favourite.save
+end
+
+# add reviews
+100.times do
+  review = Review.new
+  review.comment = Faker::Lorem.paragraph(sentence_count: 3, supplemental: true)
+  review.rating = (1..5).to_a.sample.to_f
+  review.appliance = Appliance.all.sample
+  review.user = User.all.sample
+  review.save
 end

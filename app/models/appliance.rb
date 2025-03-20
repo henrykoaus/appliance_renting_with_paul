@@ -4,9 +4,6 @@ class Appliance < ApplicationRecord
 
   has_many :reviews, dependent: :destroy
   has_many :favourites
-<<<<<<< HEAD
-  has_many :offers, dependent: :destroy
-=======
   has_many :offers
 
   # PgSearch
@@ -36,15 +33,11 @@ class Appliance < ApplicationRecord
   def average_rating
     reviews.average(:rating).to_f
   end
->>>>>>> 80bb5be2c195164cdc5d434b0f622c619adf637f
 
   private
 
   def user_must_be_merchant
     errors.add(:user, "must be a merchant") unless user&.merchant?
   end
-<<<<<<< HEAD
-=======
 
->>>>>>> 80bb5be2c195164cdc5d434b0f622c619adf637f
 end
