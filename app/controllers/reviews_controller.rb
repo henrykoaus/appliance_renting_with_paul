@@ -13,7 +13,6 @@ class ReviewsController < ApplicationController
     @review = Review.new
   end
 
-
   # GET /appliances/:appliance_id/reviews/new
   def new
     @review = Review.new

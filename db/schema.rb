@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_03_19_035419) do
+ActiveRecord::Schema[7.1].define(version: 2025_03_20_083204) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -45,6 +45,13 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_19_035419) do
     t.index ["favourite_list_id"], name: "index_favourites_on_favourite_list_id"
   end
 
+  create_table "offer_lists", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_offer_lists_on_user_id"
+  end
+
   create_table "offers", force: :cascade do |t|
     t.date "check_in_date"
     t.date "check_out_date"
@@ -52,7 +59,9 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_19_035419) do
     t.bigint "appliance_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "offer_list_id", null: false
     t.index ["appliance_id"], name: "index_offers_on_appliance_id"
+    t.index ["offer_list_id"], name: "index_offers_on_offer_list_id"
     t.index ["user_id"], name: "index_offers_on_user_id"
   end
 
@@ -85,7 +94,9 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_19_035419) do
   add_foreign_key "favourite_lists", "users"
   add_foreign_key "favourites", "appliances"
   add_foreign_key "favourites", "favourite_lists"
+  add_foreign_key "offer_lists", "users"
   add_foreign_key "offers", "appliances"
+  add_foreign_key "offers", "offer_lists"
   add_foreign_key "offers", "users"
   add_foreign_key "reviews", "appliances"
   add_foreign_key "reviews", "users"

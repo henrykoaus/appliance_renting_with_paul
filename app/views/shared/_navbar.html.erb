@@ -1,9 +1,9 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <div class="container-fluid">
-    <%= link_to "#", class: "navbar-brand" do %>
-      <%= image_tag "logo.png" %>
+    <%= link_to appliances_path, class: "navbar-brand" do %>
+      <%= image_tag "DTWash.png" %>
     <% end %>
-
+    <h3><strong>FlyAP</strong>   - Quick Rent Appliances</h3>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -23,10 +23,10 @@
           </a>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
               <%# link to get "/my_offers", to: "offers#my_offers"   %>
-              <%= link_to "My offers", offers_path, class: "dropdown-item" %>
+              <%= link_to "My offers", offer_lists_path, class: "dropdown-item" %>
               <%# link to get "/my_bookings", to: "bookings#my_bookings"   %>
               <%= link_to "My bookings", offers_path, class: "dropdown-item" %>
-              <%= link_to  "save list", favourite_lists_path, class: "dropdown-item" %>
+              <%= link_to  "My favourites", favourite_lists_path, class: "dropdown-item" %>
               <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
             </div>
           </li>

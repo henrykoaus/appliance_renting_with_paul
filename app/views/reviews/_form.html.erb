@@ -23,14 +23,7 @@
         <%= f.input :comment, label: "Comment", as: :text, input_html: { rows: 3, data: { rating_target: "comment" } } %>
       </div>
 
-      <%= f.submit "Add", class: "btn btn-primary w-100", data: { rating_target: "submitButton" } %>
+      <%= f.submit "Submit", class: "btn btn-primary w-100", data: { rating_target: "submitButton" } %>
     <% end %>
   </div>
-</div>
-
-<!-- Placeholder for showing new reviews dynamically -->
-<div id="reviews-list" data-rating-target="reviewsList">
-  <% @appliance.reviews.each do |review| %>
-    <%= render review %>
-  <% end %>
 </div>

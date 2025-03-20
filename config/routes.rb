@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
+  get 'offer_lists/index'
   resources :favourites, only: [:create, :destroy]
   resources :favourite_lists, only: [:index]
   resources :appliances do
     resources :reviews
-    resources :offers, only: [ :new, :create, :edit, :update]
   end
-  resources :reviews, only: [ :destroy ]
-  resources :offers, only: [ :index, :show, :destroy ]
+  resources :reviews, only: [:destroy]
+  resources :offers, only: [:create, :destroy]
+  resources :offer_lists, only: [:index]
   devise_for :users
   root to: "appliances#index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
