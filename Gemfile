@@ -1,6 +1,11 @@
 source "https://rubygems.org"
 
 ruby "3.3.5"
+# pg_search
+gem "pg_search"
+
+#silence warning when server starts
+gem 'ostruct'
 
 #mapBox
 gem "geocoder"

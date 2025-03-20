@@ -5,6 +5,7 @@ class AppliancesController < ApplicationController
   # GET /appliances or /appliances.json
   def index
     @appliances = Appliance.all
+    @appliances = Appliance.search(params[:address],params[:min_price],params[:max_price])
     @user = current_user
   end
 
