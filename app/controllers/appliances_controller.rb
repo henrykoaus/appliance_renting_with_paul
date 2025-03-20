@@ -34,8 +34,8 @@ class AppliancesController < ApplicationController
         format.html { redirect_to @appliance, notice: "Appliance was successfully created." }
         format.json { render :show, status: :created, location: @appliance }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @appliance.errors, status: :unprocessable_entity }
+        format.html { render :new, status: 500 }
+        format.json { render json: @appliance.errors, status: 500 }
       end
     end
   end
@@ -47,8 +47,8 @@ class AppliancesController < ApplicationController
         format.html { redirect_to @appliance, notice: "Appliance was successfully updated." }
         format.json { render :show, status: :ok, location: @appliance }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @appliance.errors, status: :unprocessable_entity }
+        format.html { render :edit, status: 500 }
+        format.json { render json: @appliance.errors, status: 500 }
       end
     end
   end
