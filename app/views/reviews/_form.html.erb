@@ -2,35 +2,35 @@
   <h4 class="mb-4">Add Your Review</h4>
   <div class="card shadow-sm p-4">
     <%= simple_form_for([appliance, review], remote: true,
-        html: { data: { controller: "ajax", action: "submit->ajax#submit" } }) do |f| %>
+        html: { data: { controller: "rating", action: "submit->rating#submit" } }) do |f| %>
 
       <!-- Hidden Rating Input -->
-      <%= f.input :rating, as: :hidden, input_html: { id: "rating-input", name: "review[rating]", data: { ajax_target: "input" } } %>
+      <%= f.input :rating, as: :hidden, input_html: { id: "rating-input", name: "review[rating]", data: { rating_target: "input" } } %>
 
       <!-- Star Rating UI -->
       <div class="mb-3">
         <label>Rating:</label>
-        <div id="star-rating" class="d-flex gap-2" data-ajax-target="stars">
+        <div id="star-rating" class="d-flex gap-2" data-rating-target="stars">
           <% (1..5).each do |i| %>
             <i class="fa-star far text-secondary fs-3 star"
-               data-action="click->ajax#select"
-               data-ajax-value="<%= i %>"></i>
+               data-action="click->rating#select"
+               data-rating-value="<%= i %>"></i>
           <% end %>
         </div>
       </div>
 
       <!-- Comment Input -->
       <div class="mb-3">
-        <%= f.input :comment, label: "Comment", as: :text, input_html: { rows: 3, data: { ajax_target: "comment" } } %>
+        <%= f.input :comment, label: "Comment", as: :text, input_html: { rows: 3, data: { rating_target: "comment" } } %>
       </div>
 
-      <%= f.submit "Add", class: "btn btn-primary w-100", data: { ajax_target: "submitButton" } %>
+      <%= f.submit "Add", class: "btn btn-primary w-100", data: { rating_target: "submitButton" } %>
     <% end %>
   </div>
 </div>
 
 <!-- Placeholder for showing new reviews dynamically -->
-<div id="reviews-list" data-ajax-target="reviewsList">
+<div id="reviews-list" data-rating-target="reviewsList">
   <% @appliance.reviews.each do |review| %>
     <%= render review %>
   <% end %>
