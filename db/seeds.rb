@@ -10,10 +10,12 @@
 import "faker"
 require 'net/http'
 require 'json'
+require 'date'
 
 Favourite.destroy_all
 Appliance.destroy_all
 FavouriteList.destroy_all
+OfferList.destroy_all
 User.destroy_all
 Review.destroy_all
 
@@ -23,7 +25,8 @@ paul.username = "paul"
 paul.email = "paul618300@gmail.com"
 paul.password = "123456"
 paul.role = 0
-paul.favourite_list =  FavouriteList.new
+paul.favourite_list = FavouriteList.new
+paul.offer_list = OfferList.new
 paul.save
 
 henry = User.new
@@ -31,7 +34,8 @@ henry.username = "henry"
 henry.email = "butwoo91@gmail.com"
 henry.password = "123456"
 henry.role = 1
-henry.favourite_list =  FavouriteList.new
+henry.favourite_list = FavouriteList.new
+henry.offer_list = OfferList.new
 henry.save
 
 # add appliances
@@ -49,9 +53,9 @@ henry.save
     name: Faker::Name.name,
     address: Faker::Address.full_address,
     availability: "March 19-April 1",
-    price:(50..100).to_a.sample,
-    overview:  Faker::Lorem.sentence,
-    user: henry,
+    price: (50..100).to_a.sample,
+    overview: Faker::Lorem.sentence,
+    user: henry
   )
 end
 
@@ -62,8 +66,15 @@ end
   favourite.name = Faker::Name.name
   favourite.description =  Faker::Lorem.sentence
   favourite.favourite_list = FavouriteList.all.sample
-  favourite.appliance =  Appliance.all.sample
+  favourite.appliance = Appliance.all.sample
   favourite.save
+end
+
+10.times do
+  offer = Offer.new
+  offer.offer_list = OfferList.all.sample
+  offer.appliance = Appliance.all.sample
+  offer.save
 end
 
 # add reviews

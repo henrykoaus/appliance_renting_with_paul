@@ -12,7 +12,7 @@
           </p>
           <p><%= review.comment %></p>
           <% if deletable %>
-            <%= link_to "Destroy this review", review, data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?", turbo_method: :delete } %>
+            <%= link_to "🗑️ Delete", review, data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?", turbo_method: :delete }, class: "text-danger text-decoration-none d-inline-flex align-items-center text-center gap-1" %>
           <% end %>
         </div>
       <% end %>

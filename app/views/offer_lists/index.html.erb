@@ -1,14 +1,13 @@
-<%= render "shared/search" %>
-<% if @appliances.any? %>
+<% if @offer_list.appliances.any? %>
   <div class="container my-5">
     <div class="row g-4">
-      <% @appliances.each do |appliance| %>
+      <% @offer_list.appliances.each do |appliance| %>
         <%= render appliance %>
       <% end %>
     </div>
   </div>
 <% else %>
   <div class="container my-5" id="no-content">
-    <h2>No Appliances Yet</h2>
+    <h2>No Offers Yet</h2>
   </div>
 <% end %>

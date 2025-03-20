@@ -7,7 +7,6 @@ class ReviewsController < ApplicationController
     render template: "reviews/index", locals: { reviews: @reviews = current_user.reviews, deletable: true }
   end
 
-
   # GET /appliances/:appliance_id/reviews/new
   def new
     @review = Review.new
