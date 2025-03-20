@@ -1,9 +1,9 @@
 class OffersController < ApplicationController
-  before_action :set_offer, only: %i[ show edit update destroy ]
+  before_action :set_offer, only: %i[ show edit update destroy book ]
 
   # GET /offers or /offers.json
   def index
-    @offers = Offer.all
+    @offers = Offer.where(user_id: nil) # Only show available offers
     @appliances = Appliance.all
   end
 
@@ -45,6 +45,16 @@ class OffersController < ApplicationController
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @offer.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  # PATCH /offers/1/book
+  def book
+    if @offer.user_id.nil?
+      @offer.update(user_id: current_user.id)
+      redirect_to @offer, notice: "Offer successfully booked!"
+    else
+      redirect_to @offer, alert: "This offer is already booked."
     end
   end
 

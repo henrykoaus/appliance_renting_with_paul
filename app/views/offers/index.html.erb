@@ -1,14 +1,17 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Offers</h1>
+<h1>My Offers</h1>
 
-<div id="offers">
-  <% offers.each do |offer| %>
-    <%= render offer %>
-    <p>
-      <%= link_to "Show this offer", offer %>
-    </p>
-  <% end %>
-</div>
+<% @offers.each do |offer| %>
+  <div>
+    <h2><%= link_to offer.appliance.name, offer_path(offer) %></h2>
+    <p>Check-in: <%= offer.check_in_date %></p>
+    <p>Check-out: <%= offer.check_out_date %></p>
 
-<%= link_to "New offer", new_offer_path %>
+    <% if offer.user_id.nil? %>
+      <%= link_to "Book Now", book_offer_path(offer), method: :patch, class: "btn btn-primary" %>
+    <% else %>
+      <p><strong>Booked by:</strong> <%= offer.user.email %></p>
+    <% end %>
+  </div>
+<% end %>

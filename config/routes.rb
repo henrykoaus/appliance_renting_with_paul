@@ -2,8 +2,9 @@ Rails.application.routes.draw do
   resources :favourites
   resources :appliances do
     resources :reviews
+    resources :offers, only: [ :new, :create, :edit, :update]
   end
-  resources :offers
+  resources :offers, only: [ :index, :show, :destroy ]
   devise_for :users
   root to: "appliances#index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

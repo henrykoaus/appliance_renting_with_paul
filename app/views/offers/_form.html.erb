@@ -1,16 +1,37 @@
+<div data-controller="total-price">
+  <%= simple_form_for([appliance, offer]) do |f| %>
+    <%= f.error_notification %>
+    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-<%= simple_form_for(@offer) do |f| %>
-  <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+    <h4 data-total-price-target="pricePerNight" data-price="<%= appliance.price %>">
+      <%= appliance.price %> per night
+    </h4>
+    <hr>
 
-  <div class="form-inputs">
-    <%= f.input :check_in_date %>
-    <%= f.input :check_out_date %>
-    <%= f.association :user %>
-    <%= f.association :appliance %>
-  </div>
+    <div class="form-inputs">
+      <%= f.input :check_in_date, as: :date, input_html: {
+          data: {
+            total_price_target: "checkIn",
+            action: "change->total-price#calculate input->total-price#calculate"
+          }
+        }
+      %>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
-<% end %>
+      <%= f.input :check_out_date, as: :date, input_html: {
+          data: {
+            total_price_target: "checkOut",
+            action: "change->total-price#calculate input->total-price#calculate"
+          }
+        }
+      %>
+    </div>
+
+    <div>
+      <strong>Total Price: </strong> <span data-total-price-target="totalPrice">0</span>
+    </div>
+
+    <div class="form-actions btn btn-primary">
+      <%= f.button :submit %>
+    </div>
+  <% end %>
+</div>

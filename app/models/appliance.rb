@@ -4,11 +4,11 @@ class Appliance < ApplicationRecord
 
   has_many :reviews, dependent: :destroy
   has_many :favourites
+  has_many :offers, dependent: :destroy
 
   private
 
   def user_must_be_merchant
     errors.add(:user, "must be a merchant") unless user&.merchant?
   end
-  has_many :offers
 end

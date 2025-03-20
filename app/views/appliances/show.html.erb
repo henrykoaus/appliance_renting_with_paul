@@ -62,7 +62,6 @@
         </div>
       </div>
 
-
       <h4>Location</h4>
       <div id="map" style="height: 300px;"></div> <!-- Placeholder for a map -->
 
@@ -73,9 +72,7 @@
     <!-- Right Column: Booking Form -->
     <div class="col-md-5">
       <div class="card p-3 shadow-sm">
-        <h4><%= @appliance.price %> per night</h4>
-        <hr>
-        <%= render template: "offers/index", locals: { offers: @offers } %>
+        <%= render "offers/form", appliance: @appliance, offer: @appliance.offers.new %>
       </div>
     </div>
   </div>
