@@ -1,5 +1,6 @@
 import { Controller } from "@hotwired/stimulus"
 import flatpickr from "flatpickr";
+import { Turbo } from "@hotwired/turbo-rails"
 
 export default class extends Controller {
   static targets = ["checkIn", "checkOut", "totalPrice", "pricePerDay", "hiddenCheckIn", "hiddenCheckOut", "hiddenTotalPrice", "submitButton"];
@@ -83,6 +84,8 @@ export default class extends Controller {
         if (data.inserted_item) {
           // Insert the new booking details (or any other response)
           console.log("Booking added:", data.inserted_item);
+          // reolad/refresh
+          // window.location.reload();
         }
 
         // Re-enable the submit button after submission

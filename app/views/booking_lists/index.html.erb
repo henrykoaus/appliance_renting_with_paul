@@ -1,6 +1,7 @@
 <% if @booking_list.appliances.any? %>
   <div class="container my-5">
     <div class="row g-4">
+      <h3 class="my-4">My Bookings</h3>
       <% @booking_list.appliances.each do |appliance| %>
         <div class="col-md-4">
           <div class="card shadow-lg border-0 h-100">

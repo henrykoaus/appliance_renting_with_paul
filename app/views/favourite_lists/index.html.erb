@@ -1,8 +1,7 @@
-
-<!-- Example UI Card -->
 <% if @favourite_list.appliances.any? %>
   <div class="container my-5">
     <div class="row g-4">
+      <h3 class="my-4">My Favourites</h3>
       <% @favourite_list.appliances.each do |appliance| %>
         <%= render appliance %>
       <% end %>

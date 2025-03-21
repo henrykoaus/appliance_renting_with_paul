@@ -7,11 +7,13 @@ class BookingsController < ApplicationController
     @booking.booking_list = current_user.booking_list
 
     if @booking.save
-      flash[:notice] = 'Booking was successfully added!'
-      render json: { message: flash[:notice] }, status: :created
+      redirect_to booking_lists_path, notice: 'Booking was successfully added!'
+      # flash[:notice] = 'Booking was successfully added!'
+      # render json: { message: flash[:notice] }, status: :created
     else
-      flash[:alert] = 'There was an issue with the creation.'
-      render json: { message: flash[:alert], errors: @booking.errors.full_messages }, status: 500
+      redirect_to appliance_path(@booking.appliance), notice: 'Booking was not successfully added!'
+      # flash[:alert] = 'There was an issue with the creation.'
+      # render json: { message: flash[:alert], errors: @booking.errors.full_messages }, status: 500
     end
     # respond_to do |format|
     #   if @booking.save

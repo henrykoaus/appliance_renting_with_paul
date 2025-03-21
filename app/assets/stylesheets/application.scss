@@ -14,3 +14,23 @@
 h3 {
   color: rgb(41, 193, 253);
 }
+
+.create-offer-btn {
+  position: fixed;
+  bottom: 20px; /* Position it 20px above the bottom of the page */
+  right: 20px;  /* Position it 20px from the right side */
+  padding: 12px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 12px; /* Optional: makes it a round button */
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.create-offer-btn:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}

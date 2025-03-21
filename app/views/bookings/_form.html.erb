@@ -1,5 +1,5 @@
 <div data-controller="datepicker">
-  <%= simple_form_for booking, url: bookings_path, method: :post, data: { action: "submit->datepicker#submit" } do |f| %>
+  <%= simple_form_for booking, url: bookings_path, method: :post, data: { turbo: false, action: "submit->datepicker#submit" } do |f| %>
     <h4 data-datepicker-target="pricePerDay" data-price="<%= appliance.price %>">
       <strong>$<%= appliance.price %></strong> - per day
     </h4>

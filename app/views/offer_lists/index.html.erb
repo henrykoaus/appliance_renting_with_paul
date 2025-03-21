@@ -1,6 +1,9 @@
+<%= button_to "Create Offer", new_appliance_path, method: :get, class: "btn btn-success create-offer-btn" %>
+
 <% if @offer_list.appliances.any? %>
   <div class="container my-5">
     <div class="row g-4">
+      <h3 class="my-4">My Offers</h3>
       <% @offer_list.appliances.each do |appliance| %>
         <%= render appliance %>
       <% end %>

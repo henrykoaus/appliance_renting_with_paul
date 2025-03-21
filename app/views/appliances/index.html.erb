@@ -1,14 +1,16 @@
-<%= render "shared/search" %>
-<% if @appliances.any? %>
-  <div class="container my-5">
-    <div class="row g-4">
-      <% @appliances.each do |appliance| %>
-        <%= render appliance %>
-      <% end %>
+<div class="my-3">
+  <%= render "shared/search" %>
+  <% if @appliances.any? %>
+    <div class="container my-5">
+      <div class="row g-4">
+        <% @appliances.each do |appliance| %>
+          <%= render appliance %>
+        <% end %>
+      </div>
     </div>
-  </div>
-<% else %>
-  <div class="container my-5" id="no-content">
-    <h2>No Appliances Yet</h2>
-  </div>
-<% end %>
+  <% else %>
+    <div class="container my-5" id="no-content">
+      <h2>No Appliances Yet</h2>
+    </div>
+  <% end %>
+</div>
