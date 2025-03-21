@@ -1,11 +1,11 @@
 class Appliance < ApplicationRecord
   belongs_to :user
-  belongs_to :offer_list, optional: true
   validate :user_must_be_merchant
 
   has_many :reviews, dependent: :destroy
   has_many :favourites
   has_many :offers
+  has_many :bookings
 
   # PgSearch
   include PgSearch::Model

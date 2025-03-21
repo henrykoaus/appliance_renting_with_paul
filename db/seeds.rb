@@ -14,8 +14,11 @@ require 'date'
 
 Favourite.destroy_all
 Appliance.destroy_all
+Offer.destroy_all
+Booking.destroy_all
 FavouriteList.destroy_all
 OfferList.destroy_all
+BookingList.destroy_all
 User.destroy_all
 Review.destroy_all
 
@@ -27,7 +30,9 @@ paul.password = "123456"
 paul.role = 0
 paul.favourite_list = FavouriteList.new
 paul.offer_list = OfferList.new
+paul.booking_list = BookingList.new
 paul.save
+
 
 henry = User.new
 henry.username = "henry"
@@ -36,6 +41,7 @@ henry.password = "123456"
 henry.role = 1
 henry.favourite_list = FavouriteList.new
 henry.offer_list = OfferList.new
+henry.booking_list = BookingList.new
 henry.save
 
 # add appliances
@@ -75,6 +81,16 @@ end
   offer.offer_list = OfferList.all.sample
   offer.appliance = Appliance.all.sample
   offer.save
+end
+
+10.times do
+  booking = Booking.new
+  booking.check_in_date = "2025-03-18"
+  booking.check_out_date = "2025-03-21"
+  booking.total_price = rand(0..1000)
+  booking.booking_list = BookingList.all.sample
+  booking.appliance = Appliance.all.sample
+  booking.save
 end
 
 # add reviews

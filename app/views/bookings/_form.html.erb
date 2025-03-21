@@ -1,0 +1,39 @@
+<div data-controller="datepicker">
+  <%= simple_form_for booking, url: bookings_path, method: :post, data: { action: "submit->datepicker#submit" } do |f| %>
+    <h4 data-datepicker-target="pricePerDay" data-price="<%= appliance.price %>">
+      <strong>$<%= appliance.price %></strong> - per day
+    </h4>
+
+    <div class="form-inputs">
+      <%= f.hidden_field :appliance_id, value: appliance.id %>
+
+      <div class="mt-4">
+        <%= f.input :check_in_date, as: :string, input_html: {
+          data: { datepicker_target: "checkIn" }
+        } %>
+      </div>
+
+      <div class="mt-4">
+        <%= f.input :check_out_date, as: :string, input_html: {
+          data: { datepicker_target: "checkOut" }
+        } %>
+      </div>
+    </div>
+
+    <!-- Hidden fields to store the calculated values -->
+    <%= f.hidden_field :check_in_date, data: { datepicker_target: "hiddenCheckIn" } %>
+    <%= f.hidden_field :check_out_date, data: { datepicker_target: "hiddenCheckOut" } %>
+    <%= f.hidden_field :total_price, data: { datepicker_target: "hiddenTotalPrice" } %>
+
+    <div class="mt-5">
+      <strong>Total Price: </strong> $<span data-datepicker-target="totalPrice">0</span>
+    </div>
+
+    <div class="mt-5">
+      <div class="form-actions btn btn-primary">
+        <!-- Updated data-datepicker-target to fix deprecation warning -->
+        <%= f.button :submit, data: { datepicker_target: "submitButton" } %>
+      </div>
+    </div>
+  <% end %>
+</div>

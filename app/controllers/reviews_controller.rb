@@ -20,7 +20,7 @@ class ReviewsController < ApplicationController
     if @review.save
       redirect_to appliance_path(@appliance), notice: "Review was successfully added."
     else
-      flash[:alert] = 'There was an issue with creating your model.'
+      flash[:alert] = 'There was an issue with the creation of the review'
       render json: { message: flash[:alert], errors: @review.errors.full_messages }, status: 500
     end
   end

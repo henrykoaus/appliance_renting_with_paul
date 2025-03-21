@@ -1,0 +1,69 @@
+<% if @booking_list.appliances.any? %>
+  <div class="container my-5">
+    <div class="row g-4">
+      <% @booking_list.appliances.each do |appliance| %>
+        <div class="col-md-4">
+          <div class="card shadow-lg border-0 h-100">
+            <!-- appliance photo -->
+            <%= image_tag( appliance.photo_url , class: "card-img-top", alt: appliance.name, style: "height: 300px; object-fit: cover;") %>
+            <!-- Card Body -->
+            <div class="card-body d-flex flex-column justify-content-between">
+              <!-- appliance name & address -->
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <h4 class="card-title m-0"><strong><%= appliance.name %></strong></h4>
+                <span class="badge bg-warning text-dark">
+                  <% if appliance.average_rating > 3 %>
+                    <i class="bi bi-hand-thumbs-up-fill text-success"></i>
+                  <% else %>
+                    <i class="bi bi-hand-thumbs-down-fill text-danger"></i>
+                  <% end %>
+                  <%= number_with_precision(appliance.average_rating, precision: 1) %>
+                </span>
+              </div>
+              <!-- appliance address -->
+              <p class="card-text text-muted d-flex align-items-center gap-2" style="font-size: 0.9rem;">
+                <span>
+                  <span class="text-secondary fw-semibold">Location:</span>
+                  <span class="text-dark ms-1" data-bs-toggle="tooltip" title="<%= appliance.address %>">
+                    <%= appliance.address %>
+                  </span>
+                </span>
+              </p>
+              <!-- appliance Overview -->
+              <p class="card-text text-muted" style="font-size: 0.9rem;">
+                <%= truncate(appliance.overview, length: 120) %>
+              </p>
+              <!-- appliance price -->
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                  <blockquote class="blockquote text-primary fst-italic">
+                    “<%= appliance.price %>”
+                  </blockquote>
+              </div>
+            </div>
+            <% appliance.bookings.each do |booking| %>
+              <div class="card mb-3 shadow-sm">
+                <div class="card-body">
+                  <h5 class="card-title text-primary">Booking Details</h5>
+                  <p class="card-text mb-2">
+                    <strong>Start Date:</strong> <%= booking.check_in_date %>
+                  </p>
+                  <p class="card-text mb-2">
+                    <strong>End Date:</strong> <%= booking.check_out_date %>
+                  </p>
+                  <div class="d-flex justify-content-between align-items-center mt-3">
+                    <p class="card-text mb-0 text-muted"><strong>Total Price:</strong> <%= booking.total_price %></p>
+                    <span class="badge bg-success text-white px-3 py-2">Confirmed</span>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% else %>
+  <div class="container my-5" id="no-content">
+    <h2>No appliance Yet</h2>
+  </div>
+<% end %>
