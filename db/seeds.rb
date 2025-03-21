@@ -12,6 +12,16 @@ require 'net/http'
 require 'json'
 require 'date'
 
+def self.english_description
+  [
+    "A beautiful #{Faker::Address.community} located in #{Faker::Address.city}.",
+    "Featured #{['spacious living area', 'modern kitchen', 'luxurious bathroom', 'cozy bedroom'].sample}.",
+    "Perfect for #{['families', 'couples', 'digital nomads', 'large groups'].sample}.",
+    "Amenities include #{Faker::House.room} and #{Faker::House.furniture}."
+  ].shuffle.join(' ')
+end
+
+
 Favourite.destroy_all
 Appliance.destroy_all
 FavouriteList.destroy_all
@@ -40,7 +50,7 @@ henry.save
 
 # add appliances
 20.times do
-  url = URI("https://api.unsplash.com/photos/random?client_id=4SNI-X9XtwrDDQH3JrvQfknmNtuvpnrsVemUhP1uPGk&query=house&orientation=landscape")
+  url = URI("https://api.unsplash.com/photos/random?client_id=M1SY_dUocqA7njmNJUD-l3KQ_VeJr5ZQSkOUZ3O386c&query=airbnb&orientation=landscape")
 
   begin
     response = Net::HTTP.get(url)
@@ -50,11 +60,11 @@ henry.save
   end
   Appliance.create!(
     photo_url: data['urls']['raw'],
-    name: Faker::Name.name,
+    name: Faker::Address.community,
     address: Faker::Address.full_address,
     availability: "March 19-April 1",
     price: (50..100).to_a.sample,
-    overview: Faker::Lorem.sentence,
+    overview: english_description,
     user: henry
   )
 end
@@ -70,12 +80,12 @@ end
   favourite.save
 end
 
-10.times do
-  offer = Offer.new
-  offer.offer_list = OfferList.all.sample
-  offer.appliance = Appliance.all.sample
-  offer.save
-end
+# 10.times do
+#   offer = Offer.new
+#   offer.offer_list = OfferList.all.sample
+#   offer.appliance = Appliance.all.sample
+#   offer.save
+# end
 
 # add reviews
 100.times do

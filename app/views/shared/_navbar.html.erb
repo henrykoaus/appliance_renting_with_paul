@@ -1,18 +1,24 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
-  <div class="container-fluid">
+  <div class="container-fluid position-relative">
     <%= link_to appliances_path, class: "navbar-brand" do %>
       <%= image_tag "DTWash.png" %>
     <% end %>
-    <h3><strong>FlyAP</strong>   - Quick Rent Appliances</h3>
+    <h3 class="position-absolute start-50 translate-middle-x mt-2">
+      <strong>FlyAP</strong> - Quick Rent Appliances
+    </h3>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto">
+      <ul class="navbar-nav ms-auto align-items-center">   <!-- Changed me-auto to ms-auto for right alignment -->
         <% if user_signed_in? %>
           <li class="nav-item active">
-            <%= link_to "Home", appliances_path, class: "nav-link" %>
+            <%#= link_to "#{time_based_greeting} #{@user.username}", "#", class: "nav-link" %>
+            <span class="nav-link"
+                  data-controller="greeting"
+                  data-greeting-target="greeting"
+                  data-greeting-username-value="<%= @user.username %>"></span>
           </li>
           <li class="nav-item">
             <%#= link_to @user.username, "#", class: "nav-link" %>

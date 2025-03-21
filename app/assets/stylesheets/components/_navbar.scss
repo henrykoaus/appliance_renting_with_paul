@@ -10,3 +10,29 @@
 .navbar-lewagon .navbar-brand img {
   width: 40px;
 }
+.greeting-text {
+  font-weight: 500;
+  line-height: 1.2;
+  margin-bottom: 1px;
+}
+
+.greeting-joke {
+  font-size: 0.8em;
+  line-height: 1;
+  opacity: 0.8;
+}
+.greeting-main {
+  color: lightpink; /* Use your theme's primary color */
+  font-weight: 500;
+}
+
+.greeting-punchline {
+  color: #6c757d; /* Bootstrap's secondary color */
+  font-size: 0.8em;
+}
+
+/* Optional hover effect */
+.greeting-wrapper:hover .greeting-punchline {
+  color: cornflowerblue;
+  transition: color 0.3s ease;
+}
