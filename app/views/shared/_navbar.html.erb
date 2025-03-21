@@ -29,6 +29,7 @@
           </a>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
               <%# link to get "/my_offers", to: "offers#my_offers"   %>
+              <%= link_to "My profile",  profiles_show_path, class: "dropdown-item" %>
               <%= link_to "My offers", offer_lists_path, class: "dropdown-item" %>
               <%# link to get "/my_bookings", to: "bookings#my_bookings"   %>
               <%= link_to "My bookings", booking_lists_path, class: "dropdown-item" %>
