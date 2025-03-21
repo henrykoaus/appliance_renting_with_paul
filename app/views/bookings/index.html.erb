@@ -1,0 +1,17 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>My Bookings</h1>
+
+<% @bookings.each do |booking| %>
+  <div>
+    <h2><%= link_to booking.appliance.name, booking_path(booking) %></h2>
+    <p>Check-in: <%= booking.check_in_date %></p>
+    <p>Check-out: <%= booking.check_out_date %></p>
+
+    <% if booking.user_id.nil? %>
+      <%= link_to "Book Now", book_booking_path(booking), method: :patch, class: "btn btn-primary" %>
+    <% else %>
+      <p><strong>Booked by:</strong> <%= booking.user.email %></p>
+    <% end %>
+  </div>
+<% end %>

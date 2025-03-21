@@ -11,7 +11,7 @@ class BookingsController < ApplicationController
       render json: { message: flash[:notice] }, status: :created
     else
       flash[:alert] = 'There was an issue with the creation.'
-      render json: { message: flash[:alert], errors: @favourite.errors.full_messages }, status: 500
+      render json: { message: flash[:alert], errors: @booking.errors.full_messages }, status: 500
     end
     # respond_to do |format|
     #   if @booking.save
@@ -32,7 +32,7 @@ class BookingsController < ApplicationController
       render json: { message: flash[:notice] }, status: :ok
     else
       flash[:alert] = "There was an issue with the deletion."
-      render json: { message: flash[:alert], errors: @favourite.errors.full_messages }, status: 500
+      render json: { message: flash[:alert], errors: @booking.errors.full_messages }, status: 500
     end
     # respond_to do |format|
     #   format.html { redirect_to bookings_path, status: :see_other, notice: "Booking was successfully destroyed." }
@@ -44,12 +44,12 @@ class BookingsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_booking
-    @booking = Booking.where(appliance_id: params[:id], booking_list: current_user.booking_list)
+    @booking = Booking.where(appliance_id: params[:id], booking_list: current_user.booking_list).first
   end
   # Only allow a list of trusted parameters through.
 
   def booking_params
-    params.require(:booking).permit(:appliance_id)
+    params.require(:booking).permit(:check_in_date, :check_out_date, :total_price, :appliance_id)
   end
 
   # GET /bookings or /bookings.json

@@ -56,32 +56,35 @@
       <%# <h4>Calendar</h4> %>
       <%# <%= render 'calendar' %> <!-- Placeholder for a calendar partial -->
 
-<!--      Reviews-->
-      <%= render template: "reviews/index", locals: { reviews: @appliance.reviews, deletable: false } %>
-
+      <!--      Reviews-->
+      <div class="mt-5">
+        <%= render template: "reviews/index", locals: { reviews: @appliance.reviews, deletable: false } %>
+      </div>
       <div data-controller="toggle"
-           data-toggle-is-login-value="<%= @user.nil? %>"
-           data-toggle-login-url-value="<%= new_user_session_path %>"
-           class="mt-5">
+      data-toggle-is-login-value="<%= @user.nil? %>"
+      data-toggle-login-url-value="<%= new_user_session_path %>"
+      class="my-5">
         <button data-action="click->toggle#fire" class="btn btn-outline-primary">
           Add a new review
         </button>
         <div data-toggle-target="togglableElement" class="d-none">
-          <%= render "reviews/form", appliance: @appliance, review: @appliance.reviews.new %>
+          <div class="my-3">
+            <%= render "reviews/form", appliance: @appliance, review: @appliance.reviews.new %>
+          </div>
         </div>
       </div>
       <!--Reviews-->
-<!--      <div class="my-5">-->
-        <%#= render template: "reviews/index", locals: { reviews: @appliance.reviews } %>
-<!--        <div data-controller="toggle" class="mt-5">-->
-<!--          <button data-action="click->toggle#fire" class="my-3 btn btn-outline-primary">-->
-<!--            Add Review-->
-<!--          </button>-->
-<!--          <div data-toggle-target="togglableElement" class="d-none">-->
-            <%#= render "reviews/form", appliance: @appliance, review: @appliance.reviews.new %>
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
+      <!--  <div class="my-5">-->
+      <%#= render template: "reviews/index", locals: { reviews: @appliance.reviews } %>
+      <!--    <div data-controller="toggle" class="mt-5">-->
+      <!--      <button data-action="click->toggle#fire" class="my-3 btn btn-outline-primary">-->
+      <!--        Add Review-->
+      <!--      </button>-->
+      <!--      <div data-toggle-target="togglableElement" class="d-none">-->
+          <%#= render "reviews/form", appliance: @appliance, review: @appliance.reviews.new %>
+      <!--      </div>-->
+      <!--    </div>-->
+      <!--  </div>-->
 
       <!-- Static Map -->
       <div-mt-5>
@@ -100,7 +103,7 @@
     <div class="col-md-5">
       <div class="mt-5">
         <div class="card p-3 shadow-sm">
-        <%= render "offers/form", appliance: @appliance, offer: @appliance.offers.new %>
+        <%= render "bookings/form", appliance: @appliance, booking: @appliance.bookings.new %>
         </div>
       </div>
     </div>
