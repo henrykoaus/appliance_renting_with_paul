@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'profiles/show'
+  get 'profiles/edit'
+  get 'profiles/update'
   get 'offer_lists/index'
   resources :favourites, only: [:create, :destroy]
   resources :favourite_lists, only: [:index]
@@ -12,7 +15,10 @@ Rails.application.routes.draw do
   resources :offer_lists, only: [:index]
   resources :bookings, only: [:create, :destroy]
   resources :booking_lists, only: [:index]
+
   devise_for :users
+  resource :profile, only: [:show, :edit, :update]  # Singular resource for user's own profile
+
   root to: "appliances#index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

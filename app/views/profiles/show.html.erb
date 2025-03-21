@@ -1,0 +1,6 @@
+<%= simple_form_for(@profile, url: profile_path, method: :patch, multipart: true) do |f| %>
+  <%= f.input :photo, as: :file %>
+  <%= f.button :submit, "submit" %>
+<% end %>
+
+<%= cl_image_tag @profile.photo.key, height: 300, width: 400, crop: :fill %>

@@ -29,6 +29,7 @@ Booking.destroy_all
 FavouriteList.destroy_all
 OfferList.destroy_all
 BookingList.destroy_all
+Profile.destroy_all
 User.destroy_all
 Review.destroy_all
 
@@ -40,6 +41,7 @@ paul.password = "123456"
 paul.role = 0
 paul.favourite_list = FavouriteList.new
 paul.offer_list = OfferList.new
+paul.profile = Profile.new
 paul.booking_list = BookingList.new
 paul.save
 
@@ -51,12 +53,13 @@ henry.password = "123456"
 henry.role = 1
 henry.favourite_list = FavouriteList.new
 henry.offer_list = OfferList.new
+henry.profile = Profile.new
 henry.booking_list = BookingList.new
 henry.save
 
 # add appliances
 20.times do
-  url = URI("https://api.unsplash.com/photos/random?client_id=M1SY_dUocqA7njmNJUD-l3KQ_VeJr5ZQSkOUZ3O386c&query=airbnb&orientation=landscape")
+    url = URI("https://api.unsplash.com/photos/random?client_id=M1SY_dUocqA7njmNJUD-l3KQ_VeJr5ZQSkOUZ3O386c&query=airbnb&orientation=landscape")
 
   begin
     response = Net::HTTP.get(url)

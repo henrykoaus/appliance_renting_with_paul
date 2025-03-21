@@ -4,6 +4,9 @@ ruby "3.3.5"
 # pg_search
 gem "pg_search"
 
+# image upload
+gem "cloudinary"
+
 #silence warning when server starts
 gem 'ostruct'
 
